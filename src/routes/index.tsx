@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap",
       },
     ],
   }),
@@ -33,12 +33,76 @@ export const Route = createFileRoute("/")({
 });
 
 const extraCss = `
-.logo-img { height: 32px; width: auto; display: inline-block; vertical-align: middle; }
+.logo-img { height: 32px; width: auto; display: inline-block; vertical-align: middle; filter: drop-shadow(0 0 12px rgba(220,38,38,.25)); }
 .sb-logo .logo-img { height: 26px; }
-nav .logo .logo-img { height: 30px; }
+nav .logo .logo-img { height: 30px; transition: transform .4s cubic-bezier(.7,0,.3,1); }
+nav .logo:hover .logo-img { transform: scale(1.06) rotate(-1deg); }
 nav.stuck .logo .logo-img { height: 26px; }
 footer .logo .logo-img { height: 36px; margin-bottom: 4px; }
 @media (hover: none) { html, body { cursor: auto !important; } #cur, #curR { display: none; } }
+
+/* ── STRONGER ANIMATIONS ─────────────────────────────────── */
+@keyframes karFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes karPulseGlow { 0%,100% { box-shadow: 0 0 0 rgba(220,38,38,.0), 0 0 0 rgba(220,38,38,0); } 50% { box-shadow: 0 0 60px rgba(220,38,38,.18), 0 0 120px rgba(220,38,38,.08); } }
+@keyframes karShimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes karRise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero crimson gradient title shimmer */
+.hero-h1 em {
+  background: linear-gradient(110deg, #DC2626 0%, #F87171 35%, #F5EFE0 50%, #F87171 65%, #DC2626 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: karShimmer 6s linear infinite;
+}
+
+/* Service card lift + accent border sweep */
+.svc-card { transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .5s; }
+.svc-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px -30px rgba(220,38,38,.35); border-color: #DC2626; }
+.svc-n { transition: color .4s, transform .5s cubic-bezier(.2,.8,.2,1); }
+.svc-card:hover .svc-n { color: rgba(220,38,38,.35); transform: scale(1.15) translateX(6px); }
+
+/* Pricing cards */
+.p-card { transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .45s; }
+.p-card:hover { transform: translateY(-8px); box-shadow: 0 24px 50px -25px rgba(220,38,38,.4); }
+.p-card.hot { animation: karPulseGlow 4.5s ease-in-out infinite; }
+
+/* Case cards */
+.case-card { transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .5s; }
+.case-card:hover { transform: translateY(-12px) scale(1.01); box-shadow: 0 30px 60px -30px rgba(220,38,38,.3); }
+
+/* Stat numbers float subtly */
+.stat-box:hover .stat-n { animation: karFloat 2s ease-in-out infinite; }
+
+/* CTA button gold (now crimson) — add ripple glow */
+.btn-gold { box-shadow: 0 8px 30px -8px rgba(220,38,38,.4); }
+.btn-gold:hover { box-shadow: 0 12px 40px -8px rgba(220,38,38,.7); }
+
+/* Marquee speed-up on hover handled by JS; add gradient fade edges */
+.marquee-wrap { position: relative; }
+.marquee-wrap::before, .marquee-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 120px; pointer-events: none; z-index: 2;
+}
+.marquee-wrap::before { left: 0; background: linear-gradient(to right, #141110, transparent); }
+.marquee-wrap::after  { right: 0; background: linear-gradient(to left,  #141110, transparent); }
+
+/* Section headings — italic crimson with subtle glow */
+.h2 em, .vp-h2 em, .cta-h em { text-shadow: 0 0 50px rgba(220,38,38,.35); }
+
+/* Process step numbers pulse on hover */
+.proc-step:hover .step-num { background: rgba(220,38,38,.08); border-color: #DC2626; transform: scale(1.08); transition: all .35s; }
+.step-num { transition: all .35s; }
+
+/* Form options — crimson glow on selected */
+.fo.sel { box-shadow: 0 0 0 1px #DC2626, 0 8px 30px -10px rgba(220,38,38,.5); }
+
+/* Scroll-snap for testimonials */
+.testi-card { transition: transform .4s cubic-bezier(.2,.8,.2,1), border-color .3s; }
+.testi-card:hover { transform: translateY(-6px); border-color: rgba(220,38,38,.4); }
+
+/* Body type a touch warmer */
+body { font-family: 'Inter', sans-serif; }
+.hero-h1, .h2, .vp-h2, .cta-h, .p-name, .step-t, .case-t, .svc-name, .testi-txt, .p-price, .stat-n, .ldr-logo, .logo, .sb-logo, .page-title, .card-title { font-family: 'Fraunces', serif; }
 `;
 
 function Index() {
