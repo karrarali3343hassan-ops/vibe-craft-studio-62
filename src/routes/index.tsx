@@ -33,12 +33,18 @@ export const Route = createFileRoute("/")({
 });
 
 const extraCss = `
-.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; filter: none; background: transparent; border: 0; box-shadow: none; mix-blend-mode: screen; }
-.sb-logo .logo-img { height: 38px; mix-blend-mode: screen; }
-nav .logo .logo-img { height: 46px; transition: transform .4s cubic-bezier(.7,0,.3,1); mix-blend-mode: screen; }
-nav .logo:hover .logo-img { transform: scale(1.06) rotate(-1deg); }
-nav.stuck .logo .logo-img { height: 40px; }
-footer .logo .logo-img { height: 56px; margin-bottom: 6px; mix-blend-mode: screen; }
+.logo-img { display: none; }
+.logo-word {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: #F5EFE0;
+  font-size: 22px;
+}
+nav.stuck .logo .logo-word { font-size: 20px; }
+footer .logo .logo-word { font-size: 28px; display: block; margin-bottom: 6px; }
+.ldr-word { font-size: 64px; }
 @media (hover: none) { html, body { cursor: auto !important; } #cur, #curR { display: none; } }
 
 /* ── STRONGER ANIMATIONS ─────────────────────────────────── */
@@ -107,8 +113,13 @@ body { font-family: 'Inter', sans-serif; }
 
 function Index() {
   const ref = useRef<HTMLDivElement>(null);
-  // Inline logo URL into HTML at render time
-  const html = bodyHtml.replace(/__LOGO__/g, logo);
+  // Replace logo img tags with native typography text
+  const html = bodyHtml
+    .replace(/<img src="__LOGO__" alt="Karrar" class="logo-img" \/>/g,
+      '<span class="logo-word">KARRAR</span>')
+    .replace('<img src="__LOGO__" alt="Karrar" style="height:80px;width:auto;" />',
+      '<span class="ldr-word">KARRAR</span>')
+    .replace(/__LOGO__/g, logo);
 
   useEffect(() => {
     // Load GSAP then run page scripts
