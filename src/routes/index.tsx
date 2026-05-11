@@ -69,6 +69,11 @@ function Index() {
           .join("\n");
         // eslint-disable-next-line no-new-func
         new Function(jsBlocks)();
+        // The script attaches a window 'load' listener for the loader.
+        // After client-side navigation, 'load' has already fired — fire it manually.
+        if (document.readyState === "complete") {
+          window.dispatchEvent(new Event("load"));
+        }
       } catch (e) {
         console.error(e);
       }

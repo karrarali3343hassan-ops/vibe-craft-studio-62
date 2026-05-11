@@ -39,6 +39,9 @@ function Dashboard() {
     try {
       // eslint-disable-next-line no-new-func
       new Function(jsBlocks)();
+      if (document.readyState === "complete") {
+        window.dispatchEvent(new Event("DOMContentLoaded"));
+      }
     } catch (e) {
       console.error(e);
     }
