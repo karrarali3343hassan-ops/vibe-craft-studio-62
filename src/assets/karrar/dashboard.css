@@ -2,19 +2,19 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:     #05050A;
-      --bg2:    #0C0C13;
-      --bgC:    #0F0F18;
-      --gold:   #C9A84C;
-      --goldL:  #E8C97B;
-      --white:  #FFFFFF;
-      --grayL:  #ABABAB;
-      --gray:   #5A5A6A;
-      --border: rgba(201,168,76,.13);
+      --bg:     #0A0807;
+      --bg2:    #141110;
+      --bgC:    #1B1816;
+      --gold:   #DC2626;
+      --goldL:  #F87171;
+      --white:  #F5EFE0;
+      --grayL:  #B8AFA3;
+      --gray:   #6B6258;
+      --border: rgba(220,38,38,.13);
       --borderW:rgba(255,255,255,.06);
       --green:  #2D7A4F;
       --amber:  #B07B2A;
-      --disp:   'Cormorant Garamond', serif;
+      --disp:   'Fraunces', serif;
       --body:   'Inter', sans-serif;
       --sidebar: 260px;
     }
@@ -24,7 +24,14 @@
 
     /* cursor */
     #cur  { position: fixed; width:10px; height:10px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
-    #curR { position: fixed; width:36px; height:36px; border:1px solid rgba(201,168,76,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition: all .14s ease; }
+    #curR {
+      position: fixed; width: 56px; height: 56px;
+      border: 1px solid rgba(245,239,224,.18); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .35s cubic-bezier(.7,0,.3,1), height .35s cubic-bezier(.7,0,.3,1), border-color .25s, transform .15s;
+      mix-blend-mode: difference;
+    }
 
     /* ── LAYOUT ── */
     .dash { display: grid; grid-template-columns: var(--sidebar) 1fr; min-height: 100vh; }
@@ -56,7 +63,7 @@
     }
     .sb-link:hover, .sb-link.on {
       color: var(--gold); border-left-color: var(--gold);
-      background: rgba(201,168,76,.04);
+      background: rgba(220,38,38,.04);
     }
     .sb-icon { font-size: 16px; width: 20px; text-align: center; }
 
@@ -69,7 +76,7 @@
     }
     .av-ring {
       width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(201,168,76,.15); border: 1px solid var(--border);
+      background: rgba(220,38,38,.15); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--disp); font-size: 16px; color: var(--gold); flex-shrink: 0;
     }
@@ -203,7 +210,7 @@
     .cal-day:hover { border-color: var(--border); color: var(--grayL); }
     .cal-day.hdr { color: var(--gray); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; aspect-ratio: unset; padding: 4px 0; }
     .cal-day.has { color: var(--white); }
-    .cal-day.pub { background: rgba(201,168,76,.15); border-color: var(--gold); color: var(--gold); }
+    .cal-day.pub { background: rgba(220,38,38,.15); border-color: var(--gold); color: var(--gold); }
     .cal-day.today { border-color: var(--borderW); color: var(--white); }
 
     /* ── INVOICE LIST ── */
@@ -224,7 +231,7 @@
       width: 52px; height: 52px; background: var(--gold);
       border: none; border-radius: 0; cursor: none;
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px; transition: all .25s; box-shadow: 0 8px 32px rgba(201,168,76,.25);
+      font-size: 22px; transition: all .25s; box-shadow: 0 8px 32px rgba(220,38,38,.25);
     }
     #chat-btn:hover { background: var(--goldL); transform: translateY(-2px); }
     #chat-box {
@@ -243,7 +250,7 @@
     .chat-msgs { padding: 16px 20px; flex: 1; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .msg { max-width: 80%; }
     .msg.them .msg-b { background: var(--bg2); border: 1px solid var(--borderW); font-size: 13px; padding: 10px 14px; line-height: 1.5; color: var(--grayL); }
-    .msg.me   .msg-b { background: rgba(201,168,76,.12); border: 1px solid var(--border); font-size: 13px; padding: 10px 14px; line-height: 1.5; }
+    .msg.me   .msg-b { background: rgba(220,38,38,.12); border: 1px solid var(--border); font-size: 13px; padding: 10px 14px; line-height: 1.5; }
     .msg.me { align-self: flex-end; }
     .msg-t { font-size: 10px; color: var(--gray); margin-top: 4px; letter-spacing: .06em; }
     .msg.me .msg-t { text-align: right; }
