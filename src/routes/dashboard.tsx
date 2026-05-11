@@ -24,8 +24,8 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 const extraCss = `
-.logo-img { height: 28px; width: auto; display: inline-block; vertical-align: middle; }
-.sb-logo .logo-img { height: 26px; }
+.logo-img { height: 44px; width: auto; display: inline-block; vertical-align: middle; filter: drop-shadow(0 0 14px rgba(220,38,38,.3)); background: transparent; border: 0; box-shadow: none; }
+.sb-logo .logo-img { height: 40px; }
 @media (hover: none) { html, body { cursor: auto !important; } #cur, #curR { display: none; } }
 `;
 
