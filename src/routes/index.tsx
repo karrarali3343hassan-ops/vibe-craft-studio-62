@@ -33,12 +33,12 @@ export const Route = createFileRoute("/")({
 });
 
 const extraCss = `
-.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; filter: none; background: transparent; border: 0; box-shadow: none; }
-.sb-logo .logo-img { height: 38px; }
-nav .logo .logo-img { height: 46px; transition: transform .4s cubic-bezier(.7,0,.3,1); }
+.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; filter: none; background: transparent; border: 0; box-shadow: none; mix-blend-mode: screen; }
+.sb-logo .logo-img { height: 38px; mix-blend-mode: screen; }
+nav .logo .logo-img { height: 46px; transition: transform .4s cubic-bezier(.7,0,.3,1); mix-blend-mode: screen; }
 nav .logo:hover .logo-img { transform: scale(1.06) rotate(-1deg); }
 nav.stuck .logo .logo-img { height: 40px; }
-footer .logo .logo-img { height: 56px; margin-bottom: 6px; }
+footer .logo .logo-img { height: 56px; margin-bottom: 6px; mix-blend-mode: screen; }
 @media (hover: none) { html, body { cursor: auto !important; } #cur, #curR { display: none; } }
 
 /* ── STRONGER ANIMATIONS ─────────────────────────────────── */
