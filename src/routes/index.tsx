@@ -33,18 +33,13 @@ export const Route = createFileRoute("/")({
 });
 
 const extraCss = `
-.logo-img { display: none; }
-.logo-word {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: #F5EFE0;
-  font-size: 22px;
-}
-nav.stuck .logo .logo-word { font-size: 20px; }
-footer .logo .logo-word { font-size: 28px; display: block; margin-bottom: 6px; }
-.ldr-word { font-size: 64px; }
+.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; background: transparent; border: 0; box-shadow: none; }
+.sb-logo .logo-img { height: 38px; }
+nav .logo .logo-img { height: 46px; transition: transform .4s cubic-bezier(.7,0,.3,1); }
+nav .logo:hover .logo-img { transform: scale(1.06) rotate(-1deg); }
+nav.stuck .logo .logo-img { height: 40px; }
+footer .logo .logo-img { height: 56px; margin-bottom: 6px; }
+.ldr-logo img { background: transparent; border: 0; box-shadow: none; }
 @media (hover: none) { html, body { cursor: auto !important; } #cur, #curR { display: none; } }
 
 /* ── STRONGER ANIMATIONS ─────────────────────────────────── */
@@ -113,15 +108,34 @@ body { font-family: 'Inter', sans-serif; }
 
 function Index() {
   const ref = useRef<HTMLDivElement>(null);
-  // Replace logo img tags with native typography text
-  const html = bodyHtml
-    .replace(/<img src="__LOGO__" alt="Karrar" class="logo-img" \/>/g,
-      '<span class="logo-word">KARRAR</span>')
-    .replace('<img src="__LOGO__" alt="Karrar" style="height:80px;width:auto;" />',
-      '<span class="ldr-word">KARRAR</span>')
-    .replace(/__LOGO__/g, logo);
+  // Inline logo URL into HTML at render time
+  const html = bodyHtml.replace(/__LOGO__/g, logo);
 
   useEffect(() => {
+    // Strip dark background pixels from logo PNGs via canvas
+    const processImg = (img: HTMLImageElement) => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (!ctx || canvas.width === 0) return;
+        ctx.drawImage(img, 0, 0);
+        const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < d.data.length; i += 4) {
+          if (d.data[i] < 80 && d.data[i + 1] < 80 && d.data[i + 2] < 80) {
+            d.data[i + 3] = 0;
+          }
+        }
+        ctx.putImageData(d, 0, 0);
+        img.src = canvas.toDataURL('image/png');
+      } catch (_) {}
+    };
+    document.querySelectorAll<HTMLImageElement>('img.logo-img, .ldr-logo img').forEach(img => {
+      if (img.complete && img.naturalWidth > 0) processImg(img);
+      else img.addEventListener('load', () => processImg(img), { once: true });
+    });
+
     // Load GSAP then run page scripts
     const loadScript = (src: string) =>
       new Promise<void>((resolve, reject) => {
