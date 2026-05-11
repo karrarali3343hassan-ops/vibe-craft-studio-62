@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 const extraCss = `
-.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; filter: drop-shadow(0 0 14px rgba(220,38,38,.3)); background: transparent; border: 0; box-shadow: none; }
+.logo-img { height: 48px; width: auto; display: inline-block; vertical-align: middle; filter: none; background: transparent; border: 0; box-shadow: none; }
 .sb-logo .logo-img { height: 38px; }
 nav .logo .logo-img { height: 46px; transition: transform .4s cubic-bezier(.7,0,.3,1); }
 nav .logo:hover .logo-img { transform: scale(1.06) rotate(-1deg); }
