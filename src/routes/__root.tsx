@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Karrar.Agency" },
+      { name: "description", content: "Karrar — Elite content marketing for SaaS agencies. Scripts, SEO, blogs, emails, LinkedIn & bespoke websites that grow your pipeline." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Karrar.Agency" },
+      { property: "og:description", content: "Karrar — Elite content marketing for SaaS agencies. Scripts, SEO, blogs, emails, LinkedIn & bespoke websites that grow your pipeline." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Karrar.Agency" },
+      { name: "twitter:description", content: "Karrar — Elite content marketing for SaaS agencies. Scripts, SEO, blogs, emails, LinkedIn & bespoke websites that grow your pipeline." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0c49c16d-0647-4dec-b3ad-7ad30bf7911a/id-preview-1c38a4a3--0a8fddde-6cee-494a-87cb-48d3ca13f5ce.lovable.app-1778496349889.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0c49c16d-0647-4dec-b3ad-7ad30bf7911a/id-preview-1c38a4a3--0a8fddde-6cee-494a-87cb-48d3ca13f5ce.lovable.app-1778496349889.png" },
     ],
     links: [
       {
